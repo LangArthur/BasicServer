@@ -39,6 +39,7 @@ set (SRC_SERVER
 ## Include headers to program
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 ## Creating server executable
