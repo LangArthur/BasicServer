@@ -31,7 +31,7 @@ void BasicServer::UdpSocket::write(const std::string &ip, unsigned short port, c
     boost::asio::ip::udp::endpoint dest(boost::asio::ip::address::from_string(ip.data()), port);
     _socket.async_send_to(boost::asio::buffer(data, sizeof(*(static_cast<const char *>(data)))), dest,
         boost::bind(&UdpSocket::handleWrite, this, boost::asio::placeholders::bytes_transferred, boost::asio::placeholders::error));
-}
+}[[maybe_unused]]
 
 void BasicServer::UdpSocket::handleRead([[maybe_unused]]const std::size_t size, const boost::system::error_code &err)
 {
