@@ -25,7 +25,11 @@ namespace BasicServer {
     class UdpSocket {
 
         public:
+            /// \param io boost io_context
+            /// \param callBack function call after the socket read something
+            /// \brief constructor
             UdpSocket(boost::asio::io_context &io, std::function<void(BasicServer::UdpSocket *)> callBack);
+            /// \brief destructor
             ~UdpSocket();
 
             /// \brief get port of socket
