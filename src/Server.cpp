@@ -15,10 +15,14 @@ BasicServer::Server::Server() : _state(false), _udpSocket(_ioContext, std::bind(
     // launching boost
     _boostThread = std::thread(&BasicServer::Server::launchBoost, this);
     _actions["shutdown"] = std::bind(&BasicServer::Server::shutdown, this);
+    _actions["port"] = std::bind(&BasicServer::Server::displayPort, this);
 }
 
 BasicServer::Server::~Server()
-{ }
+{
+    _ioContext.stop();
+    _boostThread.join();
+}
 
 void BasicServer::Server::launchBoost()
 {
@@ -38,8 +42,8 @@ void BasicServer::Server::start()
 
 void BasicServer::Server::interpret()
 {
-    if (_actions.find(_input.c_str()) != _actions.end())
-        _actions[_input.c_str()]();
+    if (_actions.find(_input) != _actions.end())
+        _actions[_input]();
     else
         std::cerr << "Invalid command: " << _input << std::endl;
 }
@@ -49,7 +53,13 @@ void BasicServer::Server::shutdown()
     _state = false;
 }
 
-void BasicServer::Server::callBack(UdpSocket *socket)
+void BasicServer::Server::callBack([[maybe_unused]]UdpSocket *socket)
 {
     std::cout << "Entering Udp calback" << std::endl;
+}
+
+void BasicServer::Server::displayPort()
+{
+    std::cout << "Udp local port: " << _udpSocket.port() << std::endl;
+    std::cout << "Udp remote port: " << _udpSocket.remoteIp() << std::endl;
 }

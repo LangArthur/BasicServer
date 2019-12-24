@@ -1,5 +1,4 @@
 /*
-** EPITECH PROJECT, 2019
 ** BasicServer
 ** File description:
 ** Macro need by server
@@ -9,5 +8,6 @@
 
 namespace BasicServer {
 
-    constexpr auto const BUFFER_SIZE = 256;
+    constexpr auto const UDP_SERVER_PORT = 80;
+    constexpr auto const BUFFER_SIZE = 4;
 }

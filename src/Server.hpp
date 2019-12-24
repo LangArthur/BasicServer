@@ -29,7 +29,9 @@ namespace BasicServer {
             Server();
             ~Server();
 
-            bool state() { return _state; };
+            /// \brief get server state
+            /// \return bool with server state
+            bool state() { return _state; }
 
             /// \brief start the server
             void start();
@@ -46,7 +48,7 @@ namespace BasicServer {
             /*! input from internal shell */
             std::string _input;
             /*! all functions executable from the internal shell */
-            std::unordered_map<const char *, std::function<void(void)>> _actions;
+            std::unordered_map<std::string, std::function<void(void)>> _actions;
 
             UdpSocket _udpSocket;
 
@@ -54,7 +56,10 @@ namespace BasicServer {
             void interpret();
             /// \brief launch boost library
             void launchBoost();
+            /// \param socket pointer to the concerned udp socket
             /// \brief socket callBack
             void callBack(UdpSocket *socket);
+            /// \brief display all current port
+            void displayPort();
     };
 }
