@@ -36,7 +36,7 @@ void BasicServer::UdpSocket::write(const std::string &ip, unsigned short port, c
 void BasicServer::UdpSocket::handleRead([[maybe_unused]]const std::size_t size, const boost::system::error_code &err)
 {
     if (err)
-        std::cout << err.category().name() << " : " << err.message() << std::endl;
+        std::cerr << err.category().name() << " : " << err.message() << std::endl;
     else {
         _callBack(this);
         _buf.fill(0);
@@ -47,5 +47,5 @@ void BasicServer::UdpSocket::handleRead([[maybe_unused]]const std::size_t size, 
 void BasicServer::UdpSocket::handleWrite([[maybe_unused]]const std::size_t size, const boost::system::error_code &err)
 {
     if (err)
-        std::cout << err.category().name() << " : " << err.message() << std::endl;
+        std::cerr << err.category().name() << " : " << err.message() << std::endl;
 }
