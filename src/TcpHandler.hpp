@@ -34,10 +34,16 @@ namespace BasicServer {
             /// \brief destructor
             ~TcpHandler();
 
+            /// \return port of the server
+            /// \brief Initiialize a callBack function to handle new connections
+            short port() { return TCP_SERVER_PORT; }
+
             /// \brief Initiialize a callBack function to handle new connections
             void accept();
 
         private:
+            /*! endpoint of the acceptor */
+            boost::asio::ip::tcp::endpoint _endpoint;
             /*! Boost acceptor to allow connections on server */
             boost::asio::ip::tcp::acceptor _acceptor;
             /*! callBack function send to all TcpSocket constructor */

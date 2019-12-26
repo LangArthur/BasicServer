@@ -11,13 +11,13 @@
 /// \brief Server methods
 
 BasicServer::Server::Server() : _state(false),
-    _tcpHandler(_ioContext, std::bind(&Server::tcpCallBack, this, std::placeholders::_1))
-    // _udpSocket(_ioContext, std::bind(&Server::udpCallBack, this, std::placeholders::_1))
+    _tcpHandler(_ioContext, std::bind(&Server::tcpCallBack, this, std::placeholders::_1)),
+    _udpSocket(_ioContext, std::bind(&Server::udpCallBack, this, std::placeholders::_1))
 {
     // launching boost
     _boostThread = std::thread(&BasicServer::Server::launchBoost, this);
     _actions["shutdown"] = std::bind(&BasicServer::Server::shutdown, this);
-    _actions["port"] = std::bind(&BasicServer::Server::displayPort, this);
+    _actions["ports"] = std::bind(&BasicServer::Server::displayPort, this);
 }
 
 BasicServer::Server::~Server()
@@ -67,6 +67,6 @@ void BasicServer::Server::tcpCallBack([[maybe_unused]]TcpSocket *socket)
 
 void BasicServer::Server::displayPort()
 {
-    // std::cout << "Udp local port: " << _udpSocket.port() << std::endl;
-    // std::cout << "Udp remote port: " << _udpSocket.remoteIp() << std::endl;
+    std::cout << "Udp local port: " << _udpSocket.port() << std::endl;
+    std::cout << "Tcp local port: " << _tcpHandler.port() << std::endl;
 }

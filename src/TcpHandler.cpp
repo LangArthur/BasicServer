@@ -11,7 +11,7 @@
 #include "TcpHandler.hpp"
 
 BasicServer::TcpHandler::TcpHandler(boost::asio::io_context &io, std::function<void(TcpSocket *)> fct) :
-    _acceptor(io, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), TCP_SERVER_PORT)), _callBack(fct)
+    _endpoint(boost::asio::ip::tcp::v4(), TCP_SERVER_PORT), _acceptor(io, _endpoint), _callBack(fct)
 {
     accept();
 }
