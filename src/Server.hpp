@@ -28,6 +28,7 @@ namespace BasicServer {
         public:
             /// \brief simple constructor
             Server();
+            /// \brief destructor
             ~Server();
 
             /// \brief get server state
