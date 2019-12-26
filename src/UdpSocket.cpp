@@ -23,17 +23,17 @@ BasicServer::UdpSocket::~UdpSocket()
 void BasicServer::UdpSocket::startAccept()
 {
     _socket.async_receive_from(boost::asio::buffer(_buf), _senderEndpoint,
-        boost::bind(&UdpSocket::handleRead, this, boost::asio::placeholders::bytes_transferred, boost::asio::placeholders::error));
+        boost::bind(&UdpSocket::handleRead, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
 }
 
 void BasicServer::UdpSocket::write(const std::string &ip, unsigned short port, const void *data)
 {
     boost::asio::ip::udp::endpoint dest(boost::asio::ip::address::from_string(ip.data()), port);
     _socket.async_send_to(boost::asio::buffer(data, sizeof(*(static_cast<const char *>(data)))), dest,
-        boost::bind(&UdpSocket::handleWrite, this, boost::asio::placeholders::bytes_transferred, boost::asio::placeholders::error));
+        boost::bind(&UdpSocket::handleWrite, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
 }[[maybe_unused]]
 
-void BasicServer::UdpSocket::handleRead([[maybe_unused]]const std::size_t size, const boost::system::error_code &err)
+void BasicServer::UdpSocket::handleRead(const boost::system::error_code &err, [[maybe_unused]]const std::size_t size)
 {
     if (err)
         std::cerr << err.category().name() << " : " << err.message() << std::endl;
@@ -44,7 +44,7 @@ void BasicServer::UdpSocket::handleRead([[maybe_unused]]const std::size_t size, 
     startAccept();
 }
 
-void BasicServer::UdpSocket::handleWrite([[maybe_unused]]const std::size_t size, const boost::system::error_code &err)
+void BasicServer::UdpSocket::handleWrite(const boost::system::error_code &err, [[maybe_unused]]const std::size_t size)
 {
     if (err)
         std::cerr << err.category().name() << " : " << err.message() << std::endl;

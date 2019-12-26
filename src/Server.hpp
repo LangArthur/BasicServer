@@ -17,6 +17,7 @@
 #include <boost/asio.hpp>
 
 #include "UdpSocket.hpp"
+#include "TcpHandler.hpp"
 
 /// \namespace BasicServer
 /// \brief Used for the all BasicServer project
@@ -49,7 +50,9 @@ namespace BasicServer {
             std::string _input;
             /*! all functions executable from the internal shell */
             std::unordered_map<std::string, std::function<void(void)>> _actions;
-
+            /*! handler for all tcp socket */
+            TcpHandler _tcpHandler;
+            /*! server's udp socket */
             UdpSocket _udpSocket;
 
             /// \brief interpret the internal shell input
@@ -58,7 +61,10 @@ namespace BasicServer {
             void launchBoost();
             /// \param socket pointer to the concerned udp socket
             /// \brief socket callBack
-            void callBack(UdpSocket *socket);
+            void udpCallBack(UdpSocket *socket);
+            /// \param socket pointer to the concerned tcp socket
+            /// \brief socket callBack
+            void tcpCallBack(TcpSocket *socket);
             /// \brief display all current port
             void displayPort();
     };

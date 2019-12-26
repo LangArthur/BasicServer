@@ -8,6 +8,7 @@
 
 namespace BasicServer {
 
-    constexpr auto const UDP_SERVER_PORT = 80;
-    constexpr auto const BUFFER_SIZE = 4;
+    constexpr auto const TCP_SERVER_PORT = 4321;
+    constexpr auto const UDP_SERVER_PORT = 1234;
+    constexpr auto const BUFFER_SIZE = 256;
 }

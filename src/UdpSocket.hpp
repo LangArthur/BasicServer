@@ -67,8 +67,8 @@ namespace BasicServer {
 
             /// \brief internal read socket's callback
             /// It will clear the buffer
-            void handleRead(const std::size_t size, const boost::system::error_code &err);
+            void handleRead(const boost::system::error_code &err, const std::size_t size);
             /// \brief internal write socket's callback
-            void handleWrite(const std::size_t size, const boost::system::error_code &err);
+            void handleWrite(const boost::system::error_code &err, const std::size_t size);
     };
 }

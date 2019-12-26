@@ -10,7 +10,9 @@
 /// \author Arthur L.
 /// \brief Server methods
 
-BasicServer::Server::Server() : _state(false), _udpSocket(_ioContext, std::bind(&Server::callBack, this, std::placeholders::_1))
+BasicServer::Server::Server() : _state(false),
+    _tcpHandler(_ioContext, std::bind(&Server::tcpCallBack, this, std::placeholders::_1))
+    // _udpSocket(_ioContext, std::bind(&Server::udpCallBack, this, std::placeholders::_1))
 {
     // launching boost
     _boostThread = std::thread(&BasicServer::Server::launchBoost, this);
@@ -53,13 +55,18 @@ void BasicServer::Server::shutdown()
     _state = false;
 }
 
-void BasicServer::Server::callBack([[maybe_unused]]UdpSocket *socket)
+void BasicServer::Server::udpCallBack([[maybe_unused]]UdpSocket *socket)
 {
-    std::cout << "Entering Udp calback" << std::endl;
+    std::cout << "Entering udp calback" << std::endl;
+}
+
+void BasicServer::Server::tcpCallBack([[maybe_unused]]TcpSocket *socket)
+{
+    std::cout << "Entering tcp calback" << std::endl;
 }
 
 void BasicServer::Server::displayPort()
 {
-    std::cout << "Udp local port: " << _udpSocket.port() << std::endl;
-    std::cout << "Udp remote port: " << _udpSocket.remoteIp() << std::endl;
+    // std::cout << "Udp local port: " << _udpSocket.port() << std::endl;
+    // std::cout << "Udp remote port: " << _udpSocket.remoteIp() << std::endl;
 }
