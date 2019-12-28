@@ -68,5 +68,7 @@ namespace BasicServer {
             void tcpCallBack(TcpSocket *socket);
             /// \brief display all current port
             void displayPort();
+            /// \brief method for sending manually a message
+            void send();
     };
 }

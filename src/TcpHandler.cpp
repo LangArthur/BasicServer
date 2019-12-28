@@ -37,3 +37,11 @@ void BasicServer::TcpHandler::handleAcceptance(boost::shared_ptr<TcpSocket> sock
     }
 
 }
+
+void BasicServer::TcpHandler::dispConnections()
+{
+    for (auto &i : _sockets) {
+        if (i->state())
+            std::cout << "Connected to " << i->remoteIp() << " on port: " << i->remotePort() << std::endl;
+    }
+}

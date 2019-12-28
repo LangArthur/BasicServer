@@ -69,4 +69,10 @@ void BasicServer::Server::displayPort()
 {
     std::cout << "Udp local port: " << _udpSocket.port() << std::endl;
     std::cout << "Tcp local port: " << _tcpHandler.port() << std::endl;
+    _tcpHandler.dispConnections();
+}
+
+void BasicServer::Server::send()
+{
+    
 }

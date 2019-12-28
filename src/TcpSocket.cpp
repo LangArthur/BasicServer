@@ -18,6 +18,8 @@ BasicServer::TcpSocket::~TcpSocket()
 
 void BasicServer::TcpSocket::start()
 {
+    _localEndPoint = _socket.local_endpoint();
+    _remoteEndPoint = _socket.remote_endpoint();
     read();
 }
 
@@ -60,7 +62,7 @@ void BasicServer::TcpSocket::disconnect(const boost::system::error_code &err)
     if (err.value() != 2) {
         std::cerr << "An error occured: " << err.message() << std::endl;
     }
-    std::cerr << "Socket is disconnected" << std::endl;
+    std::cerr << "Socket " << _remoteEndPoint.address().to_string() << " is disconnected" << std::endl;
     _isConnected = false;
     _socket.close();
 }

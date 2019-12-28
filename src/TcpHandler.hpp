@@ -40,6 +40,8 @@ namespace BasicServer {
 
             /// \brief Initiialize a callBack function to handle new connections
             void accept();
+            /// \brief print all ip and port of all connection
+            void dispConnections();
 
         private:
             /*! endpoint of the acceptor */

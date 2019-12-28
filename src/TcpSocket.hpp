@@ -35,6 +35,12 @@ namespace BasicServer {
             /// \brief get socket state
             /// \return reference on the boost tcp socket
             boost::asio::ip::tcp::socket &getSocket() { return _socket; }
+            /// \brief get remote ip
+            /// \return string containing remote ip
+            std::string remoteIp() const { return _remoteEndPoint.address().to_string(); }
+            /// \brief get remote port
+            /// \return remote port
+            short remotePort() const { return _remoteEndPoint.port(); }
 
             /// \brief start the socket for it be able to read data
             void start();
