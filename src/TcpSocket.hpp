@@ -40,7 +40,8 @@ namespace BasicServer {
             std::string remoteIp() const { return _remoteEndPoint.address().to_string(); }
             /// \brief get remote port
             /// \return remote port
-            short remotePort() const { return _remoteEndPoint.port(); }
+            /// Warning: the port could be negative
+            short remotePort() const { return _remoteEndPoint.port() < 0; }
 
             /// \brief start the socket for it be able to read data
             void start();

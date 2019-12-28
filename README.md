@@ -27,6 +27,21 @@ and you will find the executable in bin/
 
 Else, if you are on windows, the programme is not yet compatible.
 
+### Commandes list
+
+All this command are available in the internal server shell :
+
+```
+$> shutdown
+```
+Stop the server
+
+```
+$> ports
+```
+Display Upd and Tcp local port.
+After, it display all client ip and port connected with tcp.
+
 ## Running the tests
 
 Tests are not available for now
